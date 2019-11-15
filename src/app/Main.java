@@ -6,8 +6,9 @@ class Main {
 	public static int[][] dungeon = new int[25][2];
 
 	public static void main(String[] args) {
+		
 		setDungion();
-
+		
 		setSlime();
 
 		setEnemy();
@@ -15,6 +16,7 @@ class Main {
 		setBasttleStatus();
 
 		displayGame();
+		
 
 	}
 
@@ -54,6 +56,8 @@ class Main {
 				dungeon[i][1] = スライムが部屋を訪問したことがあるか
 			*/
 			dungeon[i][1] = 0;
+
+			return 0;
 		}
 	}
 }
