@@ -1,32 +1,25 @@
 package app;
 
-class Main {
+public class Main {
 
 	public static boolean end = false;
-	public static int[][] dungeon = new int[25][2];
+	public static int[][] dungeon = new int[25][3];
 
 	public static void main(String[] args) {
 		
-		setDungion();
-		
-		setSlime();
-
-		setEnemy();
-
-		setBasttleStatus();
+		setDungeon();
 
 		displayGame();
 		
-
 	}
 
-	private static setDungeon(){
+	private static void setDungeon(){
 		// 設計：中田
 		for(int i=0;i<dungeon.length;i++){
 			/*
 				dungeon[i] = 部屋id
+				以下、i部屋目のi番地データを編集する動作
 			*/
-			dungeon[i] = i;
 
 			/*
 				dungeon[i][0] = 敵キャラクターの有無
@@ -57,7 +50,52 @@ class Main {
 			*/
 			dungeon[i][1] = 0;
 
-			return 0;
+			/*
+				dungeon[i][1] = スライムが部屋にいるか
+			*/
+			dungeon[i][2] = 0;
+		}
+	}
+
+	private static void displayGame(){
+		for(int i=0;i<dungeon.length;i++){
+			System.out.print("[");
+			/**
+			 *  敵を配置
+			 */
+			if(dungeon[i][0] == 1){
+				System.out.print(" 兵 ");
+			}else if(dungeon[i][0] == 2){
+				System.out.print(" 兵 ");
+			}else if(dungeon[i][0] == 3){
+				System.out.print(" 兵 ");
+			}else if(dungeon[i][0] == 4){
+				System.out.print(" 門 ");
+			}else if(dungeon[i][0] == 5){
+				System.out.print(" 城 ");
+
+			/**
+			 * スライムを配置
+			 */
+			}else if(dungeon[i][2] == 1){
+				System.out.print("　▲　");
+
+			/**
+			 * それ以外
+			 */
+			}else{
+				System.out.print(" 　 ");
+
+			}
+			System.out.print("] ");
+
+			/**
+			 * 正しい実装方法がわからんので力技で配置
+			 * あとで綺麗にする
+			 */
+			if(i == 4 || i == 8 || i == 16 || i == 24){
+				System.out.print("\n");
+			}
 		}
 	}
 }
