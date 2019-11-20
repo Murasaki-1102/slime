@@ -5,12 +5,13 @@ import java.util.Scanner;
 public class Main {
 
 	public static boolean end = false;
+	public static boolean key = false; //鍵の有無,門番を倒した時にtrueに変える
 	public static int[][] dungeon = new int[25][3];
 	/**
 	 * int[][] dungeonはダンジョン情報を表している
 	 * 配列の第一要素はダンジョンの広さで25マス
 	 * 第二要素はそれぞれのマスごとの情報を保存している
-	 * [i][0] = 敵キャラクターの有無(0:なし 1:兵士A 2:兵士B 3:兵士C 4:門番 5:城)
+	 * [i][0] = 敵キャラクターの有無(中に 0:なし 1:兵士A 2:兵士B 3:兵士C 4:門番 5:城 を入れる)
 	 * [i][1] = スライムが部屋を訪問したことがあるか
 	 * [i][2] = スライムが部屋にいるか
 	 * 詳細はsetDungeon()関数を読むべし
@@ -113,6 +114,8 @@ public class Main {
 				   i >= 20 && n == 5){
 					System.out.println("その方向には移動できません");
 					break;
+				}else if(i+n == 24 && key == false){
+					System.out.println("鍵が無ければ城には入れません");
 				}else{
 					dungeon[i][2] = 0;
 					dungeon[i+n][2] = 1;
