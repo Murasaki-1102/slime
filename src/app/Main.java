@@ -6,6 +6,15 @@ public class Main {
 
 	public static boolean end = false;
 	public static int[][] dungeon = new int[25][3];
+	/**
+	 * int[][] dungeonはダンジョン情報を表している
+	 * 配列の第一要素はダンジョンの広さで25マス
+	 * 第二要素はそれぞれのマスごとの情報を保存している
+	 * [i][0] = 敵キャラクターの有無(0:なし 1:兵士A 2:兵士B 3:兵士C 4:門番 5:城)
+	 * [i][1] = スライムが部屋を訪問したことがあるか
+	 * [i][2] = スライムが部屋にいるか
+	 * 詳細はsetDungeon()関数を読むべし
+	 */
 
 	public static void main(String[] args) {
 		
@@ -18,7 +27,7 @@ public class Main {
 		// 設計：中田
 		for(int i=0;i<dungeon.length;i++){
 			/*
-				dungeon[i] = 部屋id
+				i = 部屋id
 				以下、i部屋目のi番地データを編集する動作
 			*/
 
@@ -52,7 +61,7 @@ public class Main {
 			dungeon[i][1] = 0;
 
 			/*
-				dungeon[i][1] = スライムが部屋にいるか
+				dungeon[i][2] = スライムが部屋にいるか
 			*/
 			dungeon[i][2] = 0;
 		}
@@ -63,6 +72,9 @@ public class Main {
 	}
 
 	private static void displayGame(){
+		/**
+		 * マップのコマンド入力
+		 */
 		System.out.println("-------");
 		displayDungeon();
 
@@ -88,6 +100,7 @@ public class Main {
 	private static void moveSlime(int n){
 		/**
 		 * スライムの移動に関する関数
+		 * 設計：中田
 		 */
 		for(int i=0;i<dungeon.length;i++){
 			if(dungeon[i][2] == 1){
