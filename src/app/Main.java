@@ -1,5 +1,7 @@
 package app;
 
+import java.util.Scanner;
+
 public class Main {
 
 	public static boolean end = false;
@@ -8,7 +10,6 @@ public class Main {
 	public static void main(String[] args) {
 		
 		setDungeon();
-
 		displayGame();
 		
 	}
@@ -55,9 +56,64 @@ public class Main {
 			*/
 			dungeon[i][2] = 0;
 		}
+		/**
+		 * スライムの初期位置をセット
+		 */
+		dungeon[0][2] = 1;
 	}
 
 	private static void displayGame(){
+		System.out.println("-------");
+		displayDungeon();
+
+		System.out.println("【移動】");
+		System.out.println("上：w 下：s 右：d 左：a");
+		System.out.print("command?：");
+		Scanner scan = new Scanner(System.in);
+		String str = scan.next();
+
+		int n = 0;
+		if(str.equals("w")){
+			n = -5;
+		}if(str.equals("a")){
+			n = -1;
+		}if(str.equals("s")){
+			n = 5;
+		}if(str.equals("d")){
+			n = 1;
+		}
+		moveSlime(n);
+	}
+
+	private static void moveSlime(int n){
+		/**
+		 * スライムの移動に関する関数
+		 */
+		for(int i=0;i<dungeon.length;i++){
+			if(dungeon[i][2] == 1){
+				/**
+				 * 端にいる時,移動を制限
+				 */
+				if(i%5 == 0 && n == -1 ||
+				   i <= 4 && n == -5 ||
+				   i%5 == 4 && n == 1 ||
+				   i >= 20 && n == 5){
+					System.out.println("その方向には移動できません");
+					break;
+				}else{
+					dungeon[i][2] = 0;
+					dungeon[i+n][2] = 1;
+					break;
+				}
+			}
+		}
+		displayGame();
+	}
+
+	private static void displayDungeon(){
+		/**
+		 * ダンジョン状況の表示
+		 */
 		for(int i=0;i<dungeon.length;i++){
 			System.out.print("[");
 			/**
@@ -78,7 +134,7 @@ public class Main {
 			 * スライムを配置
 			 */
 			}else if(dungeon[i][2] == 1){
-				System.out.print("　▲　");
+				System.out.print(" ス ");
 
 			/**
 			 * それ以外
