@@ -12,6 +12,7 @@ public class Main {
 	public static int[][] dungeon = new int[25][3];
 	public static String[] hint = new String[25];
 	public static int walk = 300; //歩数カウント,上限歩数にする
+	public static int[] items = {0,0,0}; //いったん保留,デバッグ用 グーの書、チョキの書、パーの書の所持状況を管理
 	/**
 	 * int[][] dungeonはダンジョン情報を表している
 	 * 配列の第一要素はダンジョンの広さで25マス
@@ -31,7 +32,7 @@ public class Main {
 	}
 
 	private static void setDungeon(){
-		// 設計：中田
+		// 設計：中田,竹野
 		for(int i=0;i<dungeon.length;i++){
 			/*
 				i = 部屋id
@@ -165,6 +166,7 @@ public class Main {
 
 	private static void showRule(){
 		/**
+		 * 設計：竹野
 		 * ルールの表示に関わる関数
 		 * reader.readLine()はキー入力を待つ処理
 		 */
@@ -204,6 +206,7 @@ public class Main {
 
 	private static void displayGame(){
 		/**
+		 * 設計：中田,大木
 		 * マップのコマンド入力
 		 */
 		System.out.println("残り歩数："+ walk +"歩");
@@ -222,23 +225,99 @@ public class Main {
 		if(str.equals("w")){
 			n = -5;
 			moveSlime(n);
-		}if(str.equals("a")){
+		}else if(str.equals("a")){
 			n = -1;
 			moveSlime(n);
-		}if(str.equals("s")){
+		}else if(str.equals("s")){
 			n = 5;
 			moveSlime(n);
-		}if(str.equals("d")){
+		}else if(str.equals("d")){
 			n = 1;
 			moveSlime(n);
-		}if(str.equals("u")){
+		}else if(str.equals("u")){
 			useItem();
+		}else{
+			System.out.println("無効なコマンドです");
+			displayGame();
 		}
 	}
 	
 	private static void useItem(){
+		System.out.println("--------");
+		System.out.print("今所持中のアイテム:");
+		for(int i = 0;i < items.length;i++){
+			if(items[i] == 1){
+				switch(i){
+					case 0:
+						System.out.print("[a]グーの書  ");
+						break;
+					case 1:
+						System.out.print("[b]チョキの書  ");
+						break;
+					case 2:
+						System.out.print("[c]パーの書");
+						break;
+					default:
+						break;
+				}
+			}
+		}
+		System.out.println("\n[アイテムを使用する場合、使いたいアイテムの[id]をすべて入力]");
+		System.out.println("[アイテムを使用しない場合、qを入力]");
+		System.out.print("command?:");
+		Scanner scan = new Scanner(System.in);
+		String str = scan.next();
+		System.out.println("--------");
+		if(items[0] == 1 && str.equals("a")){
+			System.out.println("スライムが進化し、さらにグーの奥義を取得した！");
+			System.out.println("進化により体力が全回復！");
+			items[0] = 0;
+		}else if(items[1] == 1 && str.equals("b")){
+			System.out.println("スライムが進化し、さらにチョキの奥義を取得した！");
+			System.out.println("進化により体力が全回復！");
+			items[1] = 0;
+		}else if(items[2] == 1 && str.equals("c")){
+			System.out.println("スライムが進化し、さらにパーの奥義を取得した！");
+			System.out.println("進化により体力が全回復！");
+			items[2] = 0;
+		}else if(items[0] == 1 && items[1] == 1 && str.equals("ab") || str.equals("ba")){
+			System.out.println("スライムが進化し、さらにグーとチョキの奥義を取得した！");
+			System.out.println("進化により体力が全回復！");
+			items[0] = 0;
+			items[1] = 0;
+		}else if(items[0] == 1 && items[2] == 1 && str.equals("ac") || str.equals("ca")){
+			System.out.println("スライムが進化し、さらにグーとパーの奥義を取得した！");
+			System.out.println("進化により体力が全回復！");
+			items[0] = 0;
+			items[2] = 0;
+		}else if(items[1] == 1 && items[2] == 1 && str.equals("bc") || str.equals("cb")){
+			System.out.println("スライムが進化し、さらにチョキとパーの奥義を取得した！");
+			System.out.println("進化により体力が全回復！");
+			items[1] = 0;
+			items[2] = 0;
+		}else if(items[0] == 1 && items[1] == 1 && items[2] == 1 && str.equals("abc") || str.equals("acb") || str.equals("bac") || str.equals("bca") || str.equals("cab") || str.equals("cba")){
+			System.out.println("スライムが進化し、すべてのステータスが上昇した！");
+			System.out.println("進化により体力が全回復！");
+			items[0] = 0;
+			items[1] = 0;
+			items[2] = 0;
+		}else if(str.equals("q")){
+			displayGame();
+		}else{
+			System.out.println("無効なコマンドです");
+			useItem();
+		}
+		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+		try{
+			System.out.println("--------");
+			
+			System.out.println("[Enterキーでマップに戻る]");
+			reader.readLine();
+			displayGame();
+		}catch(IOException e) {
+			System.out.println("問題が発生しました");
+		}
 
-		displayGame();
 	}
 
 	private static void moveSlime(int n){
@@ -277,6 +356,7 @@ public class Main {
 	}
 
 	private static void displayHint(int hintno){
+		//設計：竹野
 		String itis = hint[hintno];
 		System.out.println(itis);
 	}
