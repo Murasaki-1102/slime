@@ -206,7 +206,7 @@ public class Main {
 
 	private static void displayGame(){
 		/**
-		 * 設計：中田,大木
+		 * 設計：中田,早津
 		 * マップのコマンド入力
 		 */
 		System.out.println("残り歩数："+ walk +"歩");
@@ -243,6 +243,7 @@ public class Main {
 	}
 	
 	private static void useItem(){
+		//設計：中田,竹野,
 		System.out.println("--------");
 		System.out.print("今所持中のアイテム:");
 		for(int i = 0;i < items.length;i++){
