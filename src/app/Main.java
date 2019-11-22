@@ -7,6 +7,7 @@ public class Main {
 	public static boolean end = false;
 	public static boolean key = false; //鍵の有無,門番を倒した時にtrueに変える
 	public static int[][] dungeon = new int[25][3];
+	public static string[] hint = new string[25];
 	/**
 	 * int[][] dungeonはダンジョン情報を表している
 	 * 配列の第一要素はダンジョンの広さで25マス
@@ -70,6 +71,96 @@ public class Main {
 		 * スライムの初期位置をセット
 		 */
 		dungeon[0][2] = 1;
+
+		/**
+		 * ヒントの内容をセット
+		 */
+		for(int hintno = 0; hintno < hint.length; hintno++){
+			switch(hintno){
+				case 0:
+					hint[0] = "ここは村の入り口、ここから冒険が始まった";
+					break;
+				case 1:
+					hint[1] = "進化はアイテムを1つだけ使うより,まとめて使ったほうが強くなるらしい";
+					break;
+				case 2:
+					hint[2] = "兵士の出す手を読むことが勝利の鍵だ";
+					break;
+				case 3:
+					hint[3] = "兵士Cはパーを多く出してくる";
+					break;
+				case 4:
+					hint[4] = "兵士Bがいた場所だ";
+					break;
+				case 5:
+					hint[5] = "保留";
+					break;
+				case 6:
+					hint[6] = "兵士のステータスはみんな一緒らしい";
+					break;
+				case 7:
+					hint[7] = "兵士Aはグーを多く出してくる";
+					break;
+				case 8:
+					hint[8] = "勇者はピンチの時とても強くなる";
+					break;
+				case 9:
+					hint[9] = "兵士Cは2手目にグーを絶対出してくる";
+					break;
+				case 10:
+					hint[10] = "勇者の行動は門番に似ている";
+					break;
+				case 11:
+					hint[11] = "兵士Aは3手同じ手を出すと次の手だけ変えてくる";
+					break;
+				case 12:
+					hint[12] = "兵士Aがいた場所だ";
+					break;
+				case 13:
+					hint[13] = "保留";
+					break;
+				case 14:
+					hint[14] = "保留";
+					break;
+				case 15:
+					hint[15] = "兵士Bは3手同じ手を出すと次の2手は変えてくる";
+					break;
+				case 16:
+					hint[16] = "保留";
+					break;
+				case 17:
+					hint[17] = "保留";
+					break;
+				case 18:
+					hint[18] = "保留";
+					break;
+				case 19:
+					hint[19] = "ここには門番がいた";
+					break;
+				case 20:
+					hint[20] = "ここには兵士Cがいた";
+					break;
+				case 21:
+					hint[21] = "「兵士Bはチョキを多く出してくる！」と書かれたメモを見つけた";
+					break;
+				case 22:
+					hint[22] = "勇者は体力が減ると行動が変わる";
+					break;
+				case 23:
+					hint[23] = "勇者の攻撃は2回で普通のスライムを沈めるほどのパワーだ";
+					break;
+				case 24:
+					hint[24] = "ここには憎き勇者のいる城があった";
+					break;
+
+
+			}
+		}
+		displayRule();
+	}
+
+	private static void displayRule(){
+
 	}
 
 	private static void displayGame(){
@@ -99,6 +190,7 @@ public class Main {
 	}
 
 	private static void moveSlime(int n){
+		int grid = 0;
 		/**
 		 * スライムの移動に関する関数
 		 * 設計：中田
@@ -119,11 +211,16 @@ public class Main {
 				}else{
 					dungeon[i][2] = 0;
 					dungeon[i+n][2] = 1;
+					grid = i+n;
 					break;
 				}
 			}
 		}
+		displayHint(grid);
 		displayGame();
+	}
+
+	private static void displayHint(int hintno){		
 	}
 
 	private static void displayDungeon(){
