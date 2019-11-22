@@ -5,6 +5,8 @@ package app;
 import actor.Enemy;
 import actor.Slime;
 import buttle.*;
+import setup.*;
+
 import java.util.Scanner;
 
 // import java.util.Random;
@@ -26,6 +28,8 @@ public class Main {
         System.out.println("---------------------");
         System.out.println("---------------------");
         System.out.println("Your name is " + slime.getName() + "!!");
+
+        ShowRule.showRule();
         Janken.janken(slime, solder1);
         // Buttle.doButtle(slime, solder1);
 
