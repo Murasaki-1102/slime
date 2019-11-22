@@ -9,11 +9,21 @@ class Main {
 	public static boolean end = false;
 
 	public static void main(String[] args) {
-		actor player1;
-		player1 = new actor("slime", 12, 3);
-		actor player2;
-		player2 = new actor("solderA", 12, 4);
-		battle(player1, player2);
+		actor slime = new actor("slime", 12, 3);
+		actor slimeR = new actor("slimeR", 18, 3);
+		actor slimeB = new actor("slimeB", 18, 3);
+		actor slimeG = new actor("slimeG", 18, 3);
+		actor slimeRB = new actor("slimeRB", 24, 3);
+		actor slimeRG = new actor("slimeRG", 24, 3);
+		actor slimeBG = new actor("slimeBG", 24, 3);
+		actor slimeRGB = new actor("slimeRGB", 32, 8);
+
+		actor soldierA = new actor("soldierA", 12, 4);
+		actor soldierB = new actor("soldierB", 12, 4);
+		actor soldierC = new actor("soldierC", 12, 4);
+		actor guardian = new actor("guardian", 24, 4);
+		actor hero = new actor("hero", 35, 8);
+		battle(slime, soldierA);
 	}
 
 	public static void battle(actor a, actor b) {
