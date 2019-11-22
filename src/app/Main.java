@@ -1,6 +1,9 @@
 package app;
 
 import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class Main {
 
@@ -8,6 +11,7 @@ public class Main {
 	public static boolean key = false; //鍵の有無,門番を倒した時にtrueに変える
 	public static int[][] dungeon = new int[25][3];
 	public static String[] hint = new String[25];
+	public static int walk = 300; //歩数カウント,上限歩数にする
 	/**
 	 * int[][] dungeonはダンジョン情報を表している
 	 * 配列の第一要素はダンジョンの広さで25マス
@@ -21,6 +25,7 @@ public class Main {
 	public static void main(String[] args) {
 		
 		setDungeon();
+		showRule();
 		displayGame();
 		
 	}
@@ -41,10 +46,10 @@ public class Main {
 			if(i == 12){
 				//兵士Aを配置
 				dungeon[i][0] = 1; 
-			}else if(i == 4){
+			}else if(i == 20){
 				//兵士Bを配置
 				dungeon[i][0] = 2;
-			}else if(i == 20){
+			}else if(i == 4){
 				//兵士Cを配置
 				dungeon[i][0] = 3;
 			}else if(i == 19){
@@ -93,7 +98,7 @@ public class Main {
 					hint[4] = "兵士Bがいた場所だ";
 					break;
 				case 5:
-					hint[5] = "保留";
+					hint[5] = "進化をするタイミングが攻略のカギになる";
 					break;
 				case 6:
 					hint[6] = "兵士のステータスはみんな一緒らしい";
@@ -105,34 +110,34 @@ public class Main {
 					hint[8] = "勇者はピンチの時とても強くなる";
 					break;
 				case 9:
-					hint[9] = "兵士Cは2手目にグーを絶対出してくる";
+					hint[9] = "勇者の攻撃力は8ある";
 					break;
 				case 10:
 					hint[10] = "勇者の行動は門番に似ている";
 					break;
 				case 11:
-					hint[11] = "兵士Aは3手同じ手を出すと次の手だけ変えてくる";
+					hint[11] = "兵士はそれぞれ得意の手を持っている";
 					break;
 				case 12:
 					hint[12] = "兵士Aがいた場所だ";
 					break;
 				case 13:
-					hint[13] = "保留";
+					hint[13] = "門番と勇者を倒すには法則を見破る必要がある";
 					break;
 				case 14:
-					hint[14] = "保留";
+					hint[14] = "門番のHPは24ある";
 					break;
 				case 15:
 					hint[15] = "兵士Bは3手同じ手を出すと次の2手は変えてくる";
 					break;
 				case 16:
-					hint[16] = "保留";
+					hint[16] = "進化アイテムを3つ同時に使うとめちゃくちゃ強くなるぞ";
 					break;
 				case 17:
-					hint[17] = "保留";
+					hint[17] = "門番は最初にグーを出してくる";
 					break;
 				case 18:
-					hint[18] = "保留";
+					hint[18] = "勇者のHPは35ある";
 					break;
 				case 19:
 					hint[19] = "ここには門番がいた";
@@ -158,15 +163,57 @@ public class Main {
 		}
 	}
 
+	private static void showRule(){
+		/**
+		 * ルールの表示に関わる関数
+		 * reader.readLine()はキー入力を待つ処理
+		 */
+		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+		try {
+			System.out.println("(Enterキーで文字送り)");
+			System.out.println("「スライム・アタック」の世界へようこそ！");
+			reader.readLine();
+			System.out.println("このゲームはあなたがスライムとなり,\n仲間を奪った憎き勇者を倒すために城に向かうゲームです。");
+			reader.readLine();
+			System.out.println("スライムは上下左右に1マス移動することができ、\n兵士や門番、城マスに触れると敵と戦闘になります。");
+			reader.readLine();
+			System.out.println("勇者のいる城に侵入するには門番を倒して鍵を入手する必要があります。");
+			reader.readLine();
+			System.out.println("門番や勇者はとても強力です。そこでスライムに与えられたのが、「進化」の力です。");
+			reader.readLine();
+			System.out.println("フィールドにいる兵士を倒すことである「アイテム」を入手することができます。");
+			reader.readLine();
+			System.out.println("そのアイテムを使うとなんと体力が全回復し、さらに攻撃力が上がることもあります。");
+			reader.readLine();
+			System.out.println("アイテムは戦闘中でなければいつでも使用可能で、\n2つ以上を同時に使うこともできます。いつ使うかは戦略が試されるでしょう。");
+			reader.readLine();
+			System.out.println("戦闘はじゃんけん形式で行います。\nお互いに同時に手を出して、じゃんけんに勝つと攻撃力ぶんのダメージ、\nあいこならお互いに1点のダメージを与えます。");
+			reader.readLine();
+			System.out.println("また、空白のマスにはヒントが隠されています。\nこのヒントを手に入れることで戦闘に有利な情報が手に入るかもしれません。");
+			reader.readLine();
+			System.out.println("最後に、時間制限について説明します。\nスライムはこの城下町ではお尋ね者です。できるだけ早く城に入り、勇者を倒す必要があります。\nそのため、マスを移動できるのは"+walk+"回が限度です。\n"+walk+"歩以内に兵士や門番を倒し、最後に城マスで勇者を倒せばゲームクリアです！");
+			reader.readLine();
+			System.out.println("それではゲームを開始しましょう。Enterキーを押してね！");
+			reader.readLine();
+			System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+		} 
+		catch (IOException e) {
+			System.out.println("問題が発生したよ！");
+		}
+	}
+
 	private static void displayGame(){
 		/**
 		 * マップのコマンド入力
 		 */
-		System.out.println("-------");
+		System.out.println("残り歩数："+ walk +"歩");
+		System.out.println("---Map---");
 		displayDungeon();
 
 		System.out.println("【移動】");
 		System.out.println("上：w 下：s 右：d 左：a");
+		System.out.println("【コマンド】");
+		System.out.println("アイテムを使う：u");
 		System.out.print("command?：");
 		Scanner scan = new Scanner(System.in);
 		String str = scan.next();
@@ -174,14 +221,24 @@ public class Main {
 		int n = 0;
 		if(str.equals("w")){
 			n = -5;
+			moveSlime(n);
 		}if(str.equals("a")){
 			n = -1;
+			moveSlime(n);
 		}if(str.equals("s")){
 			n = 5;
+			moveSlime(n);
 		}if(str.equals("d")){
 			n = 1;
+			moveSlime(n);
+		}if(str.equals("u")){
+			useItem();
 		}
-		moveSlime(n);
+	}
+	
+	private static void useItem(){
+
+		displayGame();
 	}
 
 	private static void moveSlime(int n){
@@ -206,12 +263,16 @@ public class Main {
 				}else{
 					dungeon[i][2] = 0;
 					dungeon[i+n][2] = 1;
+					dungeon[i+n][1] = 1;
 					grid = i+n;
+					walk -= 1;
+					System.out.print("【ヒント】");
+					displayHint(grid);
 					break;
 				}
 			}
 		}
-		displayHint(grid);
+		
 		displayGame();
 	}
 
@@ -255,11 +316,21 @@ public class Main {
 			}
 			System.out.print("] ");
 
-			/**
-			 * 正しい実装方法がわからんので力技で配置
-			 * あとで綺麗にする
-			 */
-			if(i == 4 || i == 9 || i == 14 || i == 19 || i == 24){
+			
+			if(i == 4){
+				System.out.print("     | 兵：兵士マス（入ると戦闘開始）");
+				System.out.print("\n");
+			}else if(i == 9){
+				System.out.print("     | 門：門番マス（入ると戦闘開始）");
+				System.out.print("\n");
+			}else if(i == 14){
+				System.out.print("     | 城：城マス");
+				System.out.print("\n");
+			}else if(i == 19){
+				System.out.print("     |   　門番から得られる鍵がないと入れない");
+				System.out.print("\n");
+			}else if(i == 24){
+				System.out.print("     |     （入ると戦闘開始）");
 				System.out.print("\n");
 			}
 		}
