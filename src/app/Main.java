@@ -270,29 +270,29 @@ public class Main {
 		String str = scan.next();
 		System.out.println("--------");
 		if(items[0] == 1 && str.equals("a")){
-			System.out.println("スライムが進化し、さらにグーの奥義を取得した！");
+			System.out.println("スライムが進化し、グーの奥義を取得した！");
 			System.out.println("進化により体力が全回復！");
 			items[0] = 0;
 		}else if(items[1] == 1 && str.equals("b")){
-			System.out.println("スライムが進化し、さらにチョキの奥義を取得した！");
+			System.out.println("スライムが進化し、チョキの奥義を取得した！");
 			System.out.println("進化により体力が全回復！");
 			items[1] = 0;
 		}else if(items[2] == 1 && str.equals("c")){
-			System.out.println("スライムが進化し、さらにパーの奥義を取得した！");
+			System.out.println("スライムが進化し、パーの奥義を取得した！");
 			System.out.println("進化により体力が全回復！");
 			items[2] = 0;
 		}else if(items[0] == 1 && items[1] == 1 && str.equals("ab") || str.equals("ba")){
-			System.out.println("スライムが進化し、さらにグーとチョキの奥義を取得した！");
+			System.out.println("スライムが進化し、グーとチョキの奥義を取得した！");
 			System.out.println("進化により体力が全回復！");
 			items[0] = 0;
 			items[1] = 0;
 		}else if(items[0] == 1 && items[2] == 1 && str.equals("ac") || str.equals("ca")){
-			System.out.println("スライムが進化し、さらにグーとパーの奥義を取得した！");
+			System.out.println("スライムが進化し、グーとパーの奥義を取得した！");
 			System.out.println("進化により体力が全回復！");
 			items[0] = 0;
 			items[2] = 0;
 		}else if(items[1] == 1 && items[2] == 1 && str.equals("bc") || str.equals("cb")){
-			System.out.println("スライムが進化し、さらにチョキとパーの奥義を取得した！");
+			System.out.println("スライムが進化し、チョキとパーの奥義を取得した！");
 			System.out.println("進化により体力が全回復！");
 			items[1] = 0;
 			items[2] = 0;
