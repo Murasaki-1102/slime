@@ -7,7 +7,7 @@ public class Main {
 	public static boolean end = false;
 	public static boolean key = false; //鍵の有無,門番を倒した時にtrueに変える
 	public static int[][] dungeon = new int[25][3];
-	public static string[] hint = new string[25];
+	public static String[] hint = new String[25];
 	/**
 	 * int[][] dungeonはダンジョン情報を表している
 	 * 配列の第一要素はダンジョンの広さで25マス
@@ -78,7 +78,7 @@ public class Main {
 		for(int hintno = 0; hintno < hint.length; hintno++){
 			switch(hintno){
 				case 0:
-					hint[0] = "ここは村の入り口、ここから冒険が始まった";
+					hint[0] = "ここは村の入り口,ここから冒険が始まった";
 					break;
 				case 1:
 					hint[1] = "進化はアイテムを1つだけ使うより,まとめて使ったほうが強くなるらしい";
@@ -141,7 +141,7 @@ public class Main {
 					hint[20] = "ここには兵士Cがいた";
 					break;
 				case 21:
-					hint[21] = "「兵士Bはチョキを多く出してくる！」と書かれたメモを見つけた";
+					hint[21] = "兵士Bはチョキを多く出してくるらしい";
 					break;
 				case 22:
 					hint[22] = "勇者は体力が減ると行動が変わる";
@@ -152,15 +152,10 @@ public class Main {
 				case 24:
 					hint[24] = "ここには憎き勇者のいる城があった";
 					break;
-
-
+				default:
+					break;
 			}
 		}
-		displayRule();
-	}
-
-	private static void displayRule(){
-
 	}
 
 	private static void displayGame(){
@@ -220,7 +215,9 @@ public class Main {
 		displayGame();
 	}
 
-	private static void displayHint(int hintno){		
+	private static void displayHint(int hintno){
+		String itis = hint[hintno];
+		System.out.println(itis);
 	}
 
 	private static void displayDungeon(){
