@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 import actor.*;
-
+//村崎
 public class Buttle {
   public static void doButtle(Slime slime, Enemy enemy) throws IOException {
     boolean enemyDownFlg = false;
@@ -19,8 +19,9 @@ public class Buttle {
       str = br.readLine();
       // Janken.janken(sli me,enemy);
       // System.out.println("こちらの攻撃！");
-
-      ButtleContents.attack(slime.getAttack(), enemy,slime);
+      ButtleContents.displayStatus(slime, enemy);
+      Janken.janken(slime, enemy);
+      ButtleContents.attack(slime.getAttack(), enemy, slime);
 
       if (enemy.getHitPoint() == 0) {
         enemyDownFlg = true;
@@ -28,7 +29,7 @@ public class Buttle {
       }
 
       // System.out.println("相手の攻撃！");
-      ButtleContents.enemyAttack(enemy.getAttack(), slime,enemy);
+      ButtleContents.enemyAttack(enemy.getAttack(), slime, enemy);
 
     } while (slime.getHitPoint() != 0);
 

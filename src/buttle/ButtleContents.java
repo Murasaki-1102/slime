@@ -2,6 +2,8 @@ package buttle;
 
 import actor.*;
 
+//戦闘に関する処理＋文
+// ムラサキ
 public class ButtleContents {
 
   public static void displayStatus(Slime slime, Enemy enemy) {

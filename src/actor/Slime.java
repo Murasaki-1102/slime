@@ -1,5 +1,6 @@
 package actor;
 
+//村崎
 public class Slime extends Actor {
 
   String color;

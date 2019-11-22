@@ -3,8 +3,22 @@ package setup;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Scanner;
 
 public class ShowRule {
+  // 村崎
+  public static String slimeBorn() {
+    System.out.println("やあ！");
+    System.out.println("あなたの名前を教えてください！");
+    Scanner scanner = new Scanner(System.in);
+    String name = scanner.next();
+    System.out.println("---------------------");
+    System.out.println("---------------------");
+    System.out.println("---------------------");
+    System.out.println("---------------------");
+    System.out.println(name + "だね！教えてくれてありがとう！");
+    return name;
+  }
 
   public static void showRule() {
     /**
@@ -12,6 +26,7 @@ public class ShowRule {
      */
     BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
     try {
+
       System.out.println("(Enterキーで文字送り)");
       System.out.println("「スライム・アタック」の世界へようこそ！");
       reader.readLine();

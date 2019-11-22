@@ -3,7 +3,7 @@ package buttle;
 import actor.*;
 import java.util.Scanner;
 import java.util.Random;
-
+//村崎 たくみ
 public class Janken {
 
   public static void janken(Slime slime, Enemy enemy) {
@@ -15,8 +15,7 @@ public class Janken {
         System.out.println("バトルに勝利");
         break;
       } else {
-        ButtleContents.displayStatus(slime, enemy);
-        
+
         Scanner scan = new Scanner(System.in);
         int myHand = scan.nextInt();
 

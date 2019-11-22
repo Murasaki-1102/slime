@@ -1,5 +1,6 @@
 package actor;
 
+//村崎
 public class Actor {
   private String name;
   private int hitPoint;

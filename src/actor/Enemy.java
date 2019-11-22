@@ -1,5 +1,6 @@
 package actor;
 
+//村崎
 public class Enemy extends Actor {
 
   private String hand;
