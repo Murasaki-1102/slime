@@ -59,8 +59,10 @@ System.out.println("最後に、時間制限について説明します。\nス�
 
 
 System.out.println("それではゲームスタート!!");
-} catch (IOException e) {
-System.out.println("問題が発生したよ！");
-}
-}
+} 
+	catch (IOException e) {
+	System.out.println("問題が発生したよ！");
+
+		}
+	}
 }
