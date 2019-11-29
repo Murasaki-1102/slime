@@ -38,18 +38,18 @@ public class Main {
 	}
 
 	public static void battle(actor a, actor b) {
-		String hand1 = null;
+		String hand1 = null; // じゃんけんの手
 		String hand2 = null;
-		int guardianCount = 0;
-		int guardianCountFirst = 0;
-		while (true) {
+		int guardianCount = 0; // 門番とのターン数
+		int guardianCountFirst = 0;// これ必要かかわからん 最初のターンのみ
+		while (true) {// 無限ループ
 			if (a.hitPoint <= 0) {
-				System.out.println("死亡");
+				System.out.println("死亡");// まけ
 				break;
 			} else if (b.hitPoint <= 0) {
-				System.out.println("バトルに勝利");
+				System.out.println("バトルに勝利");// 勝ち
 				break;
-			} else {
+			} else { // バトル
 				System.out.println("*************************************************");
 				System.out.println("お前：" + a.name + "、体力：" + a.hitPoint + "、攻撃力" + a.attack);
 				System.out.println("相手：" + b.name + "、体力：" + b.hitPoint + "、攻撃力" + b.attack);
@@ -57,10 +57,10 @@ public class Main {
 
 				System.out.println("グー：1、チョキ：2、パー：3");
 				System.out.print("command?:");
-				Scanner scan = new Scanner(System.in);
+				Scanner scan = new Scanner(System.in); // 手を決める
 				int handA = scan.nextInt();
 
-				switch (handA) {
+				switch (handA) { // 1,2,3 を グーチョキパーに変換
 				case 1:
 					System.out.println("お前....グー");
 					hand1 = "グー";
@@ -75,8 +75,8 @@ public class Main {
 					break;
 				}
 
-				Random random = new Random();
-				if (b.name == "soldierA") {// グーが75%
+				Random random = new Random(); // ランダム変数生成
+				if (b.name == "soldierA") {// グーが75% 対兵A
 					int handB = random.nextInt(100);// 0~99
 					if ((handB + 1) >= 25) {
 						System.out.println("相手....グー");
@@ -90,7 +90,7 @@ public class Main {
 					}
 				} else if (b.name == "soldierB") {
 					int handB = random.nextInt(100);// 0~99
-					if ((handB + 1) >= 25) {// チョキが75%
+					if ((handB + 1) >= 25) {// チョキが75% 対兵B
 						System.out.println("相手....チョキ");
 						hand2 = "チョキ";
 					} else if ((handB + 1) <= 24 && (handB + 1) >= 13) {
@@ -102,7 +102,7 @@ public class Main {
 					}
 				} else if (b.name == "soldierC") {
 					int handB = random.nextInt(100);// 0~99
-					if ((handB + 1) >= 25) {// パーが75%
+					if ((handB + 1) >= 25) {// パーが75% 対兵C
 						System.out.println("相手....パー");
 						hand2 = "パー";
 					} else if ((handB + 1) <= 24 && (handB + 1) >= 13) {
@@ -112,13 +112,13 @@ public class Main {
 						System.out.println("相手....グー");
 						hand2 = "グー";
 					}
-				} else if (b.name == "guardian") {
+				} else if (b.name == "guardian") { // 対門番
 					if (guardianCountFirst == 0) {
 						hand2 = "グー";
 						System.out.println("相手....グー");
 						guardianCountFirst++;
 					} else if (guardianCount == 3 || guardianCount == 6 || guardianCount == 9 || guardianCount == 12
-							|| guardianCount == 15) {// 三回目はランダム
+							|| guardianCount == 15) {// 3の倍数ターンでランダムな手
 						int handB = random.nextInt(2);// 0~2
 						if (handB + 1 == 1) {
 							hand2 = "グー";
@@ -132,64 +132,65 @@ public class Main {
 						}
 					} else {
 						System.out.println("相手の前の手を出してるよ");
-						System.out.println("相手...." + hand2);
+						System.out.println("相手...." + hand2); // スライムの前の手の処理したから持ってくる感じ
 					}
-					guardianCount++;
+					guardianCount++; // ターン数計算
 					System.out.println(guardianCount);
 					if (guardianCount % 3 == 0)
 						System.out.println("次は他の手を出してきそうだよ");
 				}
+				// じゃんけんの処理
 				if (hand1.equals(hand2)) {
 					System.out.println("あいこ");
 					a.hitPoint -= 1;
 					b.hitPoint -= 1;
-					if (b.name == "guardian") {// 門番の負けカウント
+					if (b.name == "guardian") {// 門番の処理
 						if (hand1 == "グー") {
-							hand2 = "チョキ";
+							hand2 = "チョキ"; // スライムの前の手に負ける手
 						} else if (hand1 == "チョキ") {
-							hand2 = "パー";
+							hand2 = "パー"; // スライムの前の手に負ける手
 						} else {
-							hand2 = "グー";
+							hand2 = "グー"; // スライムの前の手に負ける手
 						}
 					}
 				} else if (hand1 == "グー" && hand2 == "チョキ") {// グーとチョキ
 					System.out.println("かち");
 					b.hitPoint -= a.attack;
 					if (b.name == "guardian") {// 門番の負けカウント
-						hand2 = "チョキ";
+						hand2 = "チョキ"; // スライムの前の手に負ける手
 					}
 
 				} else if (hand1 == "グー" && hand2 == "パー") {// グーとパー
 					System.out.println("まけ");
 					a.hitPoint -= b.attack;
 					if (b.name == "guardian") {
-						hand2 = "チョキ";
+						hand2 = "チョキ"; // スライムの前の手に負ける手
 					}
 
 				} else if (hand1 == "チョキ" && hand2 == "グー") {// チョキとグー
 					System.out.println("まけ");
 					a.hitPoint -= b.attack;
 					if (b.name == "guardian") {
-						hand2 = "パー";
+						hand2 = "パー"; // スライムの前の手に負ける手
 					}
 
 				} else if (hand1 == "チョキ" && hand2 == "パー") {// チョキとパー
 					System.out.println("かち");
 					b.hitPoint -= a.attack;
 					if (b.name == "guardian") {// 門番の負けカウント
-						hand2 = "パー";
+						hand2 = "パー"; // スライムの前の手に負ける手
 					}
 				} else if (hand1 == "パー" && hand2 == "グー") {// パーとグー
 					System.out.println("かち");
 					b.hitPoint -= a.attack;
 					if (b.name == "guardian") {// 門番の負けカウント
-						hand2 = "グー";
+						hand2 = "グー"; // スライムの前の手に負ける手
 					}
 				} else if (hand1 == "パー" && hand2 == "チョキ") {// パーとチョキ
 					System.out.println("まけ");
 					a.hitPoint -= b.attack;
 					if (b.name == "guardian") {
-						hand2 = "グー";
+						hand2 = "グー"; // スライムの前の手に負ける手
 					}
 
 				} else {
