@@ -9,12 +9,12 @@ import actor.*;
 public class Buttle {
   public static boolean doButtle(Slime slime, Enemy enemy){
     boolean enemyDownFlg = false;
-    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    //BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
     System.out.println("戦闘スタート！");
     do {
 
-      String str = null;
+      //String str = null;
 
       //str = br.readLine();
       // Janken.janken(slime,enemy);
