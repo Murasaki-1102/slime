@@ -22,7 +22,7 @@ public class Dungeon {
   public static Enemy solder3 = new Enemy("兵士C", 12, 4);
   public static Enemy gate = new Enemy("門番", 24, 4);
   public static Enemy hero = new Enemy("勇者", 35, 8);
-  public static Slime slime = new Slime("name", 12, 3);
+  public static Slime slime = new Slime("slime", 12, 3);
 
   /**
    * int[][] dungeonはダンジョン情報を表している 配列の第一要素はダンジョンの広さで25マス 第二要素はそれぞれのマスごとの情報を保存している
@@ -329,19 +329,19 @@ public class Dungeon {
                 case 1:
                   dungeon[grid][0] = 0;
                   items[0] = 1;
-                  break;
+                  displayGame();
                 case 2:
                   dungeon[grid][0] = 0;
                   items[1] = 1;
-                  break;
+                  displayGame();
                 case 3:
                   dungeon[grid][0] = 0;
                   items[2] = 1;
-                  break;
+                  displayGame();
                 case 4:
                   dungeon[grid][0] = 0;
                   key = true;
-                  break;
+                  displayGame();
                 case 5:
                   dungeon[grid][0] = 0;
                   end = true;

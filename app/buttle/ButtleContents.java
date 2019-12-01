@@ -12,7 +12,7 @@ public class ButtleContents {
     System.out.println("自分：" + slime.getName() + "、体力：" + slime.getHitPoint() + "、攻撃力" + slime.getAttack());
     System.out.println("相手：" + enemy.getName() + "、体力：" + enemy.getHitPoint() + "、攻撃力" + enemy.getAttack());
     System.out.println("グー：1、チョキ：2、パー：3");
-    System.out.println("command?:");
+    System.out.print("command?:");
 
   }
 
@@ -28,6 +28,9 @@ public class ButtleContents {
     System.out.println("--------------------------------------");
     System.out.println(slime.getName() + "の勝ち！！！！");
     System.out.println(enemy.getName() + "は" + damage + "のダメージで残り体力が" + enemy.getHitPoint() + "になった!");
+    if(nokoriHP > 0){
+      ButtleContents.displayStatus(slime, enemy);
+    }
   }
 
   public static void enemyAttack(int attack, Slime slime, Enemy enemy) {
@@ -42,6 +45,9 @@ public class ButtleContents {
     System.out.println("--------------------------------------");
     System.out.println(enemy.getName() + "の勝ち！！！！");
     System.out.println(slime.getName() + "は" + damage + "のダメージで残り体力が" + slime.getHitPoint() + "になった!");
+    if(nokoriHP > 0){
+      ButtleContents.displayStatus(slime, enemy);
+    }
   }
 
   public static void draw(Slime slime, Enemy enemy) {
@@ -51,6 +57,10 @@ public class ButtleContents {
     System.out.println("あいこ！");
     System.out.println(slime.getName() + "はあいこで残り体力が" + slime.getHitPoint() + "になった!");
     System.out.println(enemy.getName() + "はあいこで残り体力が" + enemy.getHitPoint() + "になった!");
+    if(slime.getHitPoint() > 0 && enemy.getHitPoint() > 0){
+      ButtleContents.displayStatus(slime, enemy);
+    }
+
   }
 
   public static void outputResult(boolean enemyDownFlg) {

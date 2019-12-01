@@ -14,12 +14,17 @@ public class Janken {
       } else if (enemy.getHitPoint() <= 0) {
         System.out.println("バトルに勝利");
         break;
-      } else {
+      }
 
-        Scanner scan = new Scanner(System.in);
-        int myHand = scan.nextInt();
-
-        switch (myHand) {
+      Scanner scan = new Scanner(System.in);
+      int myHand = 0;
+      try{
+        myHand = scan.nextInt();
+      }catch(Exception e){
+        System.out.print("正しい手をだしてね：");
+        continue;
+      }
+      switch (myHand) {
         case 1:
           System.out.println("自分....グー");
           break;
@@ -29,9 +34,10 @@ public class Janken {
         case 3:
           System.out.println("自分....パー");
           break;
-        }
-        Random random = new Random();
-        int enemyHand = random.nextInt(3) + 1;
+      }
+      Random random = new Random();
+      int enemyHand = random.nextInt(1) + 1;
+      if(myHand == 1 || myHand == 2 || myHand == 3){
         switch (enemyHand) {
         case 1:
           System.out.println("相手....グー");
@@ -43,26 +49,25 @@ public class Janken {
           System.out.println("相手....パー");
           break;
         }
-        if (myHand == enemyHand) {
-          ButtleContents.draw(slime, enemy);
-        } else if (myHand == 1 && enemyHand == 2) {// グーとチョキ
-          ButtleContents.attack(slime.getAttack(), enemy, slime);
-        } else if (myHand == 1 && enemyHand == 3) {// グーとパー
-          ButtleContents.enemyAttack(enemy.getAttack(), slime, enemy);
-        } else if (myHand == 2 && enemyHand == 1) {// チョキとグー
-          ButtleContents.enemyAttack(enemy.getAttack(), slime, enemy);
-        } else if (myHand == 2 && enemyHand == 3) {// チ ョキとパー
-          ButtleContents.attack(slime.getAttack(), enemy, slime);
-        } else if (myHand == 3 && enemyHand == 1) {// パーとグー
-          ButtleContents.attack(slime.getAttack(), enemy, slime);
-        } else if (myHand == 3 && enemyHand == 2) {// パーとチョキ
-          ButtleContents.enemyAttack(enemy.getAttack(), slime, enemy);
-        } else {
-          System.out.println("正しい手をだして");
-          continue;
-        }
+      }
+      if (myHand == enemyHand) {
+        ButtleContents.draw(slime, enemy);
+      } else if (myHand == 1 && enemyHand == 2) {// グーとチョキ
+        ButtleContents.attack(slime.getAttack(), enemy, slime);
+      } else if (myHand == 1 && enemyHand == 3) {// グーとパー
+        ButtleContents.enemyAttack(enemy.getAttack(), slime, enemy);
+      } else if (myHand == 2 && enemyHand == 1) {// チョキとグー
+        ButtleContents.enemyAttack(enemy.getAttack(), slime, enemy);
+      } else if (myHand == 2 && enemyHand == 3) {// チ ョキとパー
+        ButtleContents.attack(slime.getAttack(), enemy, slime);
+      } else if (myHand == 3 && enemyHand == 1) {// パーとグー
+        ButtleContents.attack(slime.getAttack(), enemy, slime);
+      } else if (myHand == 3 && enemyHand == 2) {// パーとチョキ
+        ButtleContents.enemyAttack(enemy.getAttack(), slime, enemy);
+      } else {
+        System.out.print("正しい手をだしてね：");
+        continue;
       }
     }
   }
-
 }

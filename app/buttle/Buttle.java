@@ -10,7 +10,8 @@ public class Buttle {
   public static boolean doButtle(Slime slime, Enemy enemy){
     boolean enemyDownFlg = false;
     //BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
+    System.out.println("-----------------");
+    System.out.println(enemy.getName() + "と出会った！");
     System.out.println("戦闘スタート！");
     do {
 
