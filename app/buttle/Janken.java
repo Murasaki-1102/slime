@@ -1,10 +1,14 @@
 package buttle;
 
 import actor.*;
+import app.Main;
+
 import java.util.Scanner;
 import java.util.Random;
 //村崎 たくみ
 public class Janken {
+  public static int count = 0;
+  public static int memory = 0;
 
   public static void janken(Slime slime, Enemy enemy) {
     while (true) {
@@ -18,6 +22,7 @@ public class Janken {
 
       Scanner scan = new Scanner(System.in);
       int myHand = 0;
+      String name = enemy.getName();
       try{
         myHand = scan.nextInt();
       }catch(Exception e){
@@ -35,8 +40,8 @@ public class Janken {
           System.out.println("自分....パー");
           break;
       }
-      Random random = new Random();
-      int enemyHand = random.nextInt(1) + 1;
+      int enemyHand = routin(enemy.getName()) + 1;
+
       if(myHand == 1 || myHand == 2 || myHand == 3){
         switch (enemyHand) {
         case 1:
@@ -69,5 +74,45 @@ public class Janken {
         continue;
       }
     }
+  }
+
+  public static int routin(String name){
+    int hand = 0;
+    int checker = 0;
+    Random random = new Random();
+    if(name == "solder1"){
+      checker = random.nextInt(100);
+      if((checker+1) >= 35){
+        hand = 0;
+      }else if ((checker+1)<= 34 && (checker+1) >= 13){
+        hand = 1;
+      }else{
+        hand = 2;
+      }
+
+    //兵士B
+    }else if(name == "solder2"){
+      checker = random.nextInt(100);
+      if((checker+1) >= 35){
+        hand = 1;
+      }else if ((checker+1)<= 34 && (checker+1) >= 13){
+        hand = 2;
+      }else{
+        hand = 0;
+      }
+    
+    //兵士C
+    }else if(name == "solder3"){
+      checker = random.nextInt(100);
+      if((checker+1) >= 35){
+        hand = 2;
+      }else if ((checker+1)<= 34 && (checker+1) >= 13){
+        hand = 1;
+      }else{
+        hand = 0;
+      }
+    }
+
+    return hand;
   }
 }
