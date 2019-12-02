@@ -202,7 +202,7 @@ public class Janken {
     System.out.println("mem:"+memory+",cou:"+count);
     
     Random random = new Random();
-    if(name == "gate"){
+    if(name == "門番"){
       if(count == 0 || count >= 4){
         hand = random.nextInt(3);
       }else{
@@ -221,7 +221,7 @@ public class Janken {
             break;
         }
       }
-    }else if(name == "hero"){
+    }else if(name == "勇者"){
       if(count == 0 || count >= 4){
         hand = random.nextInt(3);
       }else if(enemy.getHitPoint() > 18){
