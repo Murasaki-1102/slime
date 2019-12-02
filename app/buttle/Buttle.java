@@ -21,8 +21,8 @@ public class Buttle {
       }else{
         memory = Janken.exJanken(slime,enemy,count,memory);
         count++;
-        if(count > 3){
-          count = 0;
+        if(count > 5){
+          count = 1;
         }
       }
       if (enemy.getHitPoint() == 0) {
