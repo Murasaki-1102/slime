@@ -22,7 +22,7 @@ public class Janken {
 
       Scanner scan = new Scanner(System.in);
       int myHand = 0;
-      String name = enemy.getName();
+      
       try{
         myHand = scan.nextInt();
       }catch(Exception e){
@@ -77,7 +77,8 @@ public class Janken {
   }
 
   //ボス戦（門番、勇者）用に特別に関数を用意する（中身はほぼ一緒）
-  public static int exJanken(Slime slime, Enemy enemy, int count, int memory) {
+  public static int exJanken(Slime slime, Enemy enemy, int count, int memd) {
+    int memory = memd;
     while (true) {
       if (slime.getHitPoint() <= 0) {
         System.out.println("死亡");
@@ -89,11 +90,11 @@ public class Janken {
 
       Scanner scan = new Scanner(System.in);
       int myHand = 0;
-      String name = enemy.getName();
+      
       try{
         myHand = scan.nextInt();
       }catch(Exception e){
-        System.out.print("正しい手をだしてね：");
+        System.out.print("正しい手をだしてね！：");
         continue;
       }
       switch (myHand) {
@@ -107,7 +108,8 @@ public class Janken {
           System.out.println("自分....パー");
           break;
       }
-      int enemyHand = exRoutin(enemy.getName(),count,memory) + 1;
+
+      int enemyHand = exRoutin(enemy,count,memory);
 
       if(myHand == 1 || myHand == 2 || myHand == 3){
         switch (enemyHand) {
@@ -122,27 +124,34 @@ public class Janken {
           break;
         }
       }
-      memory = myHand;
+
       if (myHand == enemyHand) {
         ButtleContents.draw(slime, enemy);
+        memory = myHand;
       } else if (myHand == 1 && enemyHand == 2) {// グーとチョキ
         ButtleContents.attack(slime.getAttack(), enemy, slime);
+        memory = 1;
       } else if (myHand == 1 && enemyHand == 3) {// グーとパー
         ButtleContents.enemyAttack(enemy.getAttack(), slime, enemy);
+        memory = 1;
       } else if (myHand == 2 && enemyHand == 1) {// チョキとグー
         ButtleContents.enemyAttack(enemy.getAttack(), slime, enemy);
-      } else if (myHand == 2 && enemyHand == 3) {// チ ョキとパー
+        memory = 2;
+      } else if (myHand == 2 && enemyHand == 3) {// チョキとパー
         ButtleContents.attack(slime.getAttack(), enemy, slime);
+        memory = 2;
       } else if (myHand == 3 && enemyHand == 1) {// パーとグー
         ButtleContents.attack(slime.getAttack(), enemy, slime);
+        memory = 3;
       } else if (myHand == 3 && enemyHand == 2) {// パーとチョキ
         ButtleContents.enemyAttack(enemy.getAttack(), slime, enemy);
+        memory = 3;
       } else {
-        System.out.print("正しい手をだしてね：");
+        System.out.print("正しい手をだしてね！：");
         continue;
       }
     }
-    
+
     return memory;
   }
 
@@ -186,15 +195,67 @@ public class Janken {
     return hand;
   }
 
-  public static int exRoutin(String name,int count,int memory){
+  public static int exRoutin(Enemy enemy,int count,int memdef){
+    String name = enemy.getName();
+    int memory = memdef;
     int hand = 0;
-    int checker = 0;
-    int random = new Random(3);
+    System.out.println("mem:"+memory+",cou:"+count);
+    
+    Random random = new Random();
     if(name == "gate"){
-      if(count == 0){
-
+      if(count == 0 || count >= 4){
+        hand = random.nextInt(3);
+      }else{
+        switch(memory){
+          case 1:
+            hand = 1;
+            break;
+          case 2:
+            hand = 2;
+            break;
+          case 3:
+            hand = 0;
+            break;
+          default:
+            hand = 0;
+            break;
+        }
+      }
+    }else if(name == "hero"){
+      if(count == 0 || count >= 4){
+        hand = random.nextInt(3);
+      }else if(enemy.getHitPoint() > 18){
+        switch(memory){
+          case 1:
+            hand = 2;
+            break;
+          case 2:
+            hand = 0;
+            break;
+          case 3:
+            hand = 1;
+            break;
+          default:
+            hand = 0;
+            break;
+        }
+      }else{
+        switch(memory){
+          case 1:
+            hand = 1;
+            break;
+          case 2:
+            hand = 2;
+            break;
+          case 3:
+            hand = 0;
+            break;
+          default:
+            hand = 0;
+            break;
+        }
       }
     }
-    return hand;
+    return hand+1;
   }
 }
