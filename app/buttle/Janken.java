@@ -203,7 +203,7 @@ public class Janken {
     
     Random random = new Random();
     if(name == "門番"){
-      if(count == 0 || count >= 4){
+      if(count <= 0 || count >= 4){
         hand = random.nextInt(3);
       }else{
         switch(memory){

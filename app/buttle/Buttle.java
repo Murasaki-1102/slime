@@ -9,23 +9,24 @@ import actor.*;
 public class Buttle {
   
   public static boolean doButtle(Slime slime, Enemy enemy){
-    int count = -1;
+    
     int memory = 0;
+    int count = -1;
     boolean enemyDownFlg = false;
     
     System.out.println("-----------------");
     System.out.println(enemy.getName() + "と出会った！");
     System.out.println("戦闘スタート！");
     do {
+      count += 1;
+      if(count > 4){
+        count = 1;
+      }
       ButtleContents.displayStatus(slime, enemy);
       if(enemy.getName() != "門番" && enemy.getName() != "勇者"){
         Janken.janken(slime, enemy);
       }else{
         memory = Janken.exJanken(slime,enemy,count,memory);
-      }
-      count += 1;
-      if(count > 4){
-        count = 1;
       }
       if (enemy.getHitPoint() == 0) {
         enemyDownFlg = true;
