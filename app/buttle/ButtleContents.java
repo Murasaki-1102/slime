@@ -1,5 +1,5 @@
 package buttle;
-
+import java.io.*;
 import actor.*;
 
 //戦闘に関する処理＋文
@@ -7,7 +7,14 @@ import actor.*;
 public class ButtleContents {
 
   public static void displayStatus(Slime slime, Enemy enemy) {
-    System.out.println("--------------------------------------");
+    BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+    try {
+      System.out.println("[Enterで次へ]");      
+      reader.readLine();
+    } catch (IOException e) {
+      System.out.println("問題が発生しました");
+    }
+    System.out.println("--------------------------------------\n");
 
     System.out.println("自分：" + slime.getName() + "、体力：" + slime.getHitPoint() + "、攻撃力" + slime.getAttack());
     System.out.println("相手：" + enemy.getName() + "、体力：" + enemy.getHitPoint() + "、攻撃力" + enemy.getAttack());
@@ -25,7 +32,7 @@ public class ButtleContents {
     } else {
       enemy.setHitPoint(nokoriHP);
     }
-    System.out.println("--------------------------------------");
+    System.out.println("--------------------------------------\n");
     System.out.println(slime.getName() + "の勝ち！！！！");
     System.out.println(enemy.getName() + "は" + damage + "のダメージで残り体力が" + enemy.getHitPoint() + "になった!");
     if(nokoriHP > 0){
@@ -35,6 +42,13 @@ public class ButtleContents {
 
   public static void enemyAttack(int attack, Slime slime, Enemy enemy) {
     int damage = attack;
+    System.out.println("--------------------------------------");
+    System.out.println(enemy.getName() + "の勝ち！！！！");
+
+    if(enemy.getMode() == 1 && enemy.getHitPoint() <= 8){
+      System.out.println("勇者は力を振り絞り強力な攻撃を放った！！");
+      damage += 4;
+    }
 
     int nokoriHP = slime.getHitPoint() - damage;
     if (nokoriHP <= 0) {
@@ -42,8 +56,6 @@ public class ButtleContents {
     } else {
       slime.setHitPoint(nokoriHP);
     }
-    System.out.println("--------------------------------------");
-    System.out.println(enemy.getName() + "の勝ち！！！！");
     System.out.println(slime.getName() + "は" + damage + "のダメージで残り体力が" + slime.getHitPoint() + "になった!");
     if(nokoriHP > 0){
       ButtleContents.displayStatus(slime, enemy);

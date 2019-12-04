@@ -17,12 +17,12 @@ public class Dungeon {
   public static String[] hint = new String[25];
   public static int walk = 20; // 歩数カウント,上限歩数にする
   public static int[] items = { 0, 0, 0 }; // いったん保留,デバッグ用 グーの書、チョキの書、パーの書の所持状況を管理
-  public static Enemy solder1 = new Enemy("兵士A", 12, 4);
-  public static Enemy solder2 = new Enemy("兵士B", 12, 4);
-  public static Enemy solder3 = new Enemy("兵士C", 12, 4);
-  public static Enemy gate = new Enemy("門番", 24, 4);
-  public static Enemy hero = new Enemy("勇者", 35, 8);
-  public static Slime slime = new Slime("スライム", 12, 3);
+  public static Enemy solder1 = new Enemy("兵士A", 12, 4, 0);
+  public static Enemy solder2 = new Enemy("兵士B", 12, 4, 0);
+  public static Enemy solder3 = new Enemy("兵士C", 12, 4, 0);
+  public static Enemy gate = new Enemy("門番", 24, 4, 0);
+  public static Enemy hero = new Enemy("勇者", 35, 8, 1);
+  public static Slime slime = new Slime("スライム", 12, 3, 0);
 
   /**
    * int[][] dungeonはダンジョン情報を表している 配列の第一要素はダンジョンの広さで25マス 第二要素はそれぞれのマスごとの情報を保存している
@@ -205,7 +205,33 @@ public class Dungeon {
     System.out.println("[現在のステータス]");
     System.out.println("HP:"+slime.getHitPoint());
     System.out.println("基本攻撃力:"+slime.getAttack());
-
+    System.out.print("取得スキル:");
+    switch(slime.getMode()){
+      case 0:
+        System.out.println("なし");
+        break;
+      case 1:
+        System.out.println("[グーの奥義(グーで勝利するとダメージが倍になる)]");
+        break;
+      case 2:
+        System.out.println("[チョキの奥義(チョキで勝利するとダメージが倍になる)]");
+        break;
+      case 3:
+        System.out.println("[パーの奥義(パーで勝利するとダメージが倍になる)]");
+        break;
+      case 12:
+        System.out.println("[グー・チョキの奥義(グーまたはチョキで勝利するとダメージが倍になる)]");
+        break;
+      case 13:
+        System.out.println("[グー・パーの奥義(グーまたはパーで勝利するとダメージが倍になる)]");
+        break;
+      case 23:
+        System.out.println("[チョキ・パーの奥義(チョキまたはパーで勝利するとダメージが倍になる)]");
+        break;
+      default:
+        System.out.println("なし");
+        break;
+    }
     BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
     try {
       System.out.println("--------");
@@ -249,33 +275,39 @@ public class Dungeon {
       System.out.println("スライムが進化し、さらにグーの奥義を取得した！");
       System.out.println("進化により体力が全回復！");
       slime.setHitPoint(18);
+      slime.setMode(1);
       items[0] = 0;
     } else if (items[1] == 1 && str.equals("b")) {
       System.out.println("スライムが進化し、さらにチョキの奥義を取得した！");
       System.out.println("進化により体力が全回復！");
       slime.setHitPoint(18);
+      slime.setMode(2);
       items[1] = 0;
     } else if (items[2] == 1 && str.equals("c")) {
       System.out.println("スライムが進化し、さらにパーの奥義を取得した！");
       System.out.println("進化により体力が全回復！");
       slime.setHitPoint(18);
+      slime.setMode(3);
       items[2] = 0;
     } else if (items[0] == 1 && items[1] == 1 && str.equals("ab") || str.equals("ba")) {
       System.out.println("スライムが進化し、さらにグーとチョキの奥義を取得した！");
       System.out.println("進化により体力が全回復！");
       slime.setHitPoint(24);
+      slime.setMode(12);
       items[0] = 0;
       items[1] = 0;
     } else if (items[0] == 1 && items[2] == 1 && str.equals("ac") || str.equals("ca")) {
       System.out.println("スライムが進化し、さらにグーとパーの奥義を取得した！");
       System.out.println("進化により体力が全回復！");
       slime.setHitPoint(24);
+      slime.setMode(13);
       items[0] = 0;
       items[2] = 0;
     } else if (items[1] == 1 && items[2] == 1 && str.equals("bc") || str.equals("cb")) {
       System.out.println("スライムが進化し、さらにチョキとパーの奥義を取得した！");
       System.out.println("進化により体力が全回復！");
       slime.setHitPoint(24);
+      slime.setMode(23);
       items[1] = 0;
       items[2] = 0;
     } else if (items[0] == 1 && items[1] == 1 && items[2] == 1 && str.equals("abc") || str.equals("acb")
@@ -284,6 +316,7 @@ public class Dungeon {
       System.out.println("進化により体力が全回復！");
       slime.setHitPoint(32);
       slime.setAttack(8);
+      slime.setMode(123);
       items[0] = 0;
       items[1] = 0;
       items[2] = 0;
@@ -331,7 +364,7 @@ public class Dungeon {
             gameOver();
           }
           if(dungeon[grid][0] != 0){
-            Enemy opponent = new Enemy("",0,0);
+            Enemy opponent = new Enemy("",0,0,0);
             switch(dungeon[grid][0]){
               case 1:
                 opponent = solder1;

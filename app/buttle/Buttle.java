@@ -13,7 +13,7 @@ public class Buttle {
     int memory = 0;
     int count = -1;
     boolean enemyDownFlg = false;
-    
+    System.out.println("\n\n\n\n--------！--------\n\n\n\n");
     System.out.println("-----------------");
     System.out.println(enemy.getName() + "と出会った！");
     System.out.println("戦闘スタート！");
