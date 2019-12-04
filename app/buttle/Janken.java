@@ -159,7 +159,7 @@ public class Janken {
     int hand = 0;
     int checker = 0;
     Random random = new Random();
-    if(name == "solder1"){
+    if(name == "兵士A"){
       checker = random.nextInt(100);
       if((checker+1) >= 35){
         hand = 0;
@@ -170,7 +170,7 @@ public class Janken {
       }
 
     //兵士B
-    }else if(name == "solder2"){
+    }else if(name == "兵士B"){
       checker = random.nextInt(100);
       if((checker+1) >= 35){
         hand = 1;
@@ -181,7 +181,7 @@ public class Janken {
       }
     
     //兵士C
-    }else if(name == "solder3"){
+    }else if(name == "兵士C"){
       checker = random.nextInt(100);
       if((checker+1) >= 35){
         hand = 2;

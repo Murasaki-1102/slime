@@ -22,7 +22,7 @@ public class Dungeon {
   public static Enemy solder3 = new Enemy("兵士C", 12, 4);
   public static Enemy gate = new Enemy("門番", 24, 4);
   public static Enemy hero = new Enemy("勇者", 35, 8);
-  public static Slime slime = new Slime("slime", 12, 3);
+  public static Slime slime = new Slime("スライム", 12, 3);
 
   /**
    * int[][] dungeonはダンジョン情報を表している 配列の第一要素はダンジョンの広さで25マス 第二要素はそれぞれのマスごとの情報を保存している
@@ -172,7 +172,7 @@ public class Dungeon {
     System.out.println("【移動】");
     System.out.println("上：w 下：s 右：d 左：a");
     System.out.println("【コマンド】");
-    System.out.println("アイテムを使う：u");
+    System.out.println("アイテムを使う：u 現在のステータスを見る：p");
     System.out.print("command?：");
     Scanner scan = new Scanner(System.in);
     String str = scan.next();
@@ -192,9 +192,29 @@ public class Dungeon {
       moveSlime(n);
     } else if (str.equals("u")) {
       useItem();
+    } else if (str.equals("p")) {
+      checkStatus();
     } else {
       System.out.println("無効なコマンドです");
       displayGame();
+    }
+  }
+
+  public static void checkStatus(){
+    System.out.println("--------");
+    System.out.println("[現在のステータス]");
+    System.out.println("HP:"+slime.getHitPoint());
+    System.out.println("基本攻撃力:"+slime.getAttack());
+
+    BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+    try {
+      System.out.println("--------");
+
+      System.out.println("[Enterキーでマップに戻る]");
+      reader.readLine();
+      displayGame();
+    } catch (IOException e) {
+      System.out.println("問題が発生しました");
     }
   }
 
@@ -332,6 +352,15 @@ public class Dungeon {
                 break;
             }
             result = buttle.Buttle.doButtle(slime,opponent);
+            BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+            try {
+              System.out.println("--------");
+
+              System.out.println("[Enterキーでマップに戻る]");
+              reader.readLine();
+            } catch (IOException e) {
+              System.out.println("問題が発生しました");
+            }
             if(result == true){
               switch(dungeon[grid][0]){
                 case 1:
