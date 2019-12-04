@@ -1,4 +1,4 @@
-package app;
+//package app;
 // import java.util.Scanner;
 // import actor.Actor;
 import actor.Enemy;
@@ -20,8 +20,6 @@ import setup.*;
  * レイアウト組み立てなおす
  * 
  */
-
-// import java.util.Random;
 
 public class Main {
     public static void main(String[] args) throws Exception {

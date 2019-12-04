@@ -1,7 +1,7 @@
 package buttle;
 
 import actor.*;
-import app.Main;
+//import app.Main;
 
 import java.util.Scanner;
 import java.util.Random;
