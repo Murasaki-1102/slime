@@ -497,13 +497,13 @@ public class Dungeon {
         System.out.print("     | 門：門番マス（入ると戦闘開始）");
         System.out.print("\n");
       } else if (i == 14) {
-        System.out.print("     | 城：城マス");
+        System.out.print("     | 城：城マス（入ると戦闘開始）");
         System.out.print("\n");
       } else if (i == 19) {
         System.out.print("     |   　門番から得られる鍵がないと入れない");
         System.out.print("\n");
       } else if (i == 24) {
-        System.out.print("     |     （入ると戦闘開始）");
+        System.out.print("     | ス：スライムの現在位置");
         System.out.print("\n");
       }
     }
