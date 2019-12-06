@@ -443,9 +443,9 @@ public class Dungeon {
   }
 
   public static void gameOver(){
-    if(end = true){
+    if(end == true){
       if(dungeon[24][0] == 0){
-        System.out.println("ゲームクリアしました");
+        System.out.println("ゲームクリアしました！！！！！！！！おめでとう！！！！！！！");
       }else{
         System.out.println("あなたは死にました");
       }
