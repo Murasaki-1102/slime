@@ -120,7 +120,7 @@ public class Dungeon {
         hint[12] = "兵士Aがいた場所だ";
         break;
       case 13:
-        hint[13] = "門番と勇者を倒すには法則を見破る必要がある";
+        hint[13] = "門番と勇者は法則を見破ればどんな状況からでも勝てる";
         break;
       case 14:
         hint[14] = "門番のHPは24ある";

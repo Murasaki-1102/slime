@@ -226,7 +226,7 @@ public class Janken {
             hand = 0;
             break;
           default:
-            hand = random.nextInt(3);
+            hand = 0;
             break;
         }
     }else if(name == "勇者"){
