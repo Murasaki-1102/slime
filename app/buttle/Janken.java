@@ -215,9 +215,6 @@ public class Janken {
     
     Random random = new Random();
     if(name == "門番"){
-      if(count <= 0 || count >= 4){
-        hand = random.nextInt(3);
-      }else{
         switch(memory){
           case 1:
             hand = 1;
@@ -229,14 +226,11 @@ public class Janken {
             hand = 0;
             break;
           default:
-            hand = 0;
+            hand = random.nextInt(3);
             break;
         }
-      }
     }else if(name == "勇者"){
-      if(count == 0 || count >= 4){
-        hand = random.nextInt(3);
-      }else if(enemy.getHitPoint() > 18){
+      if(enemy.getHitPoint() > 18){
         switch(memory){
           case 1:
             hand = 2;
@@ -248,7 +242,7 @@ public class Janken {
             hand = 1;
             break;
           default:
-            hand = 0;
+            hand = random.nextInt(3);
             break;
         }
       }else{
@@ -263,7 +257,7 @@ public class Janken {
             hand = 0;
             break;
           default:
-            hand = 0;
+            hand = random.nextInt(3);
             break;
         }
       }
