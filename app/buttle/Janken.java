@@ -211,7 +211,7 @@ public class Janken {
     String name = enemy.getName();
     int memory = memdef;
     int hand = 0;
-    System.out.println("mem:"+memory+",cou:"+count);
+    //System.out.println("mem:"+memory+",cou:"+count);
     
     Random random = new Random();
     if(name == "門番"){
