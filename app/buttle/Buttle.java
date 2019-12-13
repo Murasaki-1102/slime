@@ -32,6 +32,7 @@ public class Buttle {
     } while (slime.getHitPoint() != 0);
 
     ButtleContents.outputResult(enemyDownFlg, enemy);
+
     System.out.println("バトルが終了しました");
 
     return enemyDownFlg;

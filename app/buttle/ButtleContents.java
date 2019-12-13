@@ -79,6 +79,7 @@ public class ButtleContents {
   public static void outputResult(boolean enemyDownFlg, Enemy enemy) {
     if (enemyDownFlg) {
       System.out.println("\n勝ちました！");
+
       switch (enemy.getName()) {
       case "兵士A":
         System.out.println("**********************");
