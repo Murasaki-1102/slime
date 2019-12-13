@@ -30,7 +30,7 @@ public class Dungeon {
    * スライムが部屋を訪問したことがあるか [i][2] = スライムが部屋にいるか 詳細はsetDungeon()関数を読むべし
    */
 
-  public static void setDungeon(){
+  public static void setDungeon() {
     // 設計：中田,竹野
     for (int i = 0; i < dungeon.length; i++) {
       /*
@@ -81,7 +81,7 @@ public class Dungeon {
     for (int hintno = 0; hintno < hint.length; hintno++) {
       switch (hintno) {
       case 0:
-        hint[0] = "ここは村の入り口,ここから冒険が始まった";
+        hint[0] = "南西にいる兵士はB" + " " + "中央にいる兵士はＡ" + " " + "北東にいる兵士はＣ";
         break;
       case 1:
         hint[1] = "進化はアイテムを1つだけ使うより,まとめて使ったほうが強くなるらしい";
@@ -200,37 +200,37 @@ public class Dungeon {
     }
   }
 
-  public static void checkStatus(){
+  public static void checkStatus() {
     System.out.println("--------");
     System.out.println("[現在のステータス]");
-    System.out.println("HP:"+slime.getHitPoint());
-    System.out.println("基本攻撃力:"+slime.getAttack());
+    System.out.println("HP:" + slime.getHitPoint());
+    System.out.println("基本攻撃力:" + slime.getAttack());
     System.out.print("取得スキル:");
-    switch(slime.getMode()){
-      case 0:
-        System.out.println("なし");
-        break;
-      case 1:
-        System.out.println("[グーの奥義(グーで勝利するとダメージが倍になる)]");
-        break;
-      case 2:
-        System.out.println("[チョキの奥義(チョキで勝利するとダメージが倍になる)]");
-        break;
-      case 3:
-        System.out.println("[パーの奥義(パーで勝利するとダメージが倍になる)]");
-        break;
-      case 12:
-        System.out.println("[グー・チョキの奥義(グーまたはチョキで勝利するとダメージが倍になる)]");
-        break;
-      case 13:
-        System.out.println("[グー・パーの奥義(グーまたはパーで勝利するとダメージが倍になる)]");
-        break;
-      case 23:
-        System.out.println("[チョキ・パーの奥義(チョキまたはパーで勝利するとダメージが倍になる)]");
-        break;
-      default:
-        System.out.println("なし");
-        break;
+    switch (slime.getMode()) {
+    case 0:
+      System.out.println("なし");
+      break;
+    case 1:
+      System.out.println("[グーの奥義(グーで勝利するとダメージが倍になる)]");
+      break;
+    case 2:
+      System.out.println("[チョキの奥義(チョキで勝利するとダメージが倍になる)]");
+      break;
+    case 3:
+      System.out.println("[パーの奥義(パーで勝利するとダメージが倍になる)]");
+      break;
+    case 12:
+      System.out.println("[グー・チョキの奥義(グーまたはチョキで勝利するとダメージが倍になる)]");
+      break;
+    case 13:
+      System.out.println("[グー・パーの奥義(グーまたはパーで勝利するとダメージが倍になる)]");
+      break;
+    case 23:
+      System.out.println("[チョキ・パーの奥義(チョキまたはパーで勝利するとダメージが倍になる)]");
+      break;
+    default:
+      System.out.println("なし");
+      break;
     }
     BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
     try {
@@ -339,7 +339,7 @@ public class Dungeon {
 
   }
 
-  public static void moveSlime(int n){
+  public static void moveSlime(int n) {
     int grid = 0;
     /**
      * スライムの移動に関する関数 設計：中田
@@ -360,31 +360,31 @@ public class Dungeon {
           dungeon[i + n][1] = 1;
           grid = i + n;
           walk -= 1;
-          if(walk < 0){
+          if (walk < 0) {
             gameOver();
           }
-          if(dungeon[grid][0] != 0){
-            Enemy opponent = new Enemy("",0,0,0);
-            switch(dungeon[grid][0]){
-              case 1:
-                opponent = solder1;
-                break;
-              case 2:
-                opponent = solder2;
-                break;
-              case 3:
-                opponent = solder3;
-                break;
-              case 4:
-                opponent = gate;
-                break;
-              case 5:
-                opponent = hero;
-                break;
-              default:
-                break;
+          if (dungeon[grid][0] != 0) {
+            Enemy opponent = new Enemy("", 0, 0, 0);
+            switch (dungeon[grid][0]) {
+            case 1:
+              opponent = solder1;
+              break;
+            case 2:
+              opponent = solder2;
+              break;
+            case 3:
+              opponent = solder3;
+              break;
+            case 4:
+              opponent = gate;
+              break;
+            case 5:
+              opponent = hero;
+              break;
+            default:
+              break;
             }
-            result = buttle.Buttle.doButtle(slime,opponent);
+            result = buttle.Buttle.doButtle(slime, opponent);
             BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
             try {
               System.out.println("--------");
@@ -394,37 +394,37 @@ public class Dungeon {
             } catch (IOException e) {
               System.out.println("問題が発生しました");
             }
-            if(result == true){
-              switch(dungeon[grid][0]){
-                case 1:
-                  dungeon[grid][0] = 0;
-                  items[0] = 1;
-                  displayGame();
-                case 2:
-                  dungeon[grid][0] = 0;
-                  items[1] = 1;
-                  displayGame();
-                case 3:
-                  dungeon[grid][0] = 0;
-                  items[2] = 1;
-                  displayGame();
-                case 4:
-                  dungeon[grid][0] = 0;
-                  key = true;
-                  displayGame();
-                case 5:
-                  dungeon[grid][0] = 0;
-                  end = true;
-                  gameOver();
-                default:
-                  break;
+            if (result == true) {
+              switch (dungeon[grid][0]) {
+              case 1:
+                dungeon[grid][0] = 0;
+                items[0] = 1;
+                displayGame();
+              case 2:
+                dungeon[grid][0] = 0;
+                items[1] = 1;
+                displayGame();
+              case 3:
+                dungeon[grid][0] = 0;
+                items[2] = 1;
+                displayGame();
+              case 4:
+                dungeon[grid][0] = 0;
+                key = true;
+                displayGame();
+              case 5:
+                dungeon[grid][0] = 0;
+                end = true;
+                gameOver();
+              default:
+                break;
               }
             }
-            if(result == false){
+            if (result == false) {
               end = true;
               gameOver();
             }
-          }else{
+          } else {
             System.out.print("【ヒント】");
             displayHint(grid);
             break;
@@ -442,14 +442,23 @@ public class Dungeon {
     System.out.println(itis);
   }
 
-  public static void gameOver(){
-    if(end == true){
-      if(dungeon[24][0] == 0){
-        System.out.println("ゲームクリアしました！！！！！！！！おめでとう！！！！！！！");
-      }else{
+  public static void gameOver() {
+    if (end == true) {
+      if (dungeon[24][0] == 0) {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        try {
+          System.out.println("みんなの仇はとったよ...\nガク....");
+          reader.readLine();
+          System.out.println("スライムは家族の仇をとり、安らかに眠りについた...");
+          reader.readLine();
+          System.out.println("ゲームクリアしました！！！！！！！！おめでとう！！！！！！！");
+        } catch (IOException e) {
+          System.out.println("問題が発生したよ。");
+        }
+      } else {
         System.out.println("あなたは死にました");
       }
-    }else{
+    } else {
       System.out.println("あなたは敵に囲まれました");
     }
     System.exit(0);
