@@ -141,7 +141,11 @@ public class Janken {
         ButtleContents.draw(slime, enemy);
         memory = myHand;
       } else if (myHand == 1 && enemyHand == 2) {// グーとチョキ
-        ButtleContents.attack(slime.getAttack(), enemy, slime);
+        if(slime.getMode() == 1 || slime.getMode() == 12){
+          ButtleContents.attack(slime.getAttack()+3, enemy, slime);
+        }else{
+          ButtleContents.attack(slime.getAttack(), enemy, slime);
+        }
         memory = 1;
       } else if (myHand == 1 && enemyHand == 3) {// グーとパー
         ButtleContents.enemyAttack(enemy.getAttack(), slime, enemy);
@@ -150,10 +154,18 @@ public class Janken {
         ButtleContents.enemyAttack(enemy.getAttack(), slime, enemy);
         memory = 2;
       } else if (myHand == 2 && enemyHand == 3) {// チョキとパー
-        ButtleContents.attack(slime.getAttack(), enemy, slime);
+        if(slime.getMode() == 2 || slime.getMode() == 12){
+          ButtleContents.attack(slime.getAttack()+3, enemy, slime);
+        }else{
+          ButtleContents.attack(slime.getAttack(), enemy, slime);
+        }
         memory = 2;
       } else if (myHand == 3 && enemyHand == 1) {// パーとグー
-        ButtleContents.attack(slime.getAttack(), enemy, slime);
+        if(slime.getMode() == 3 || slime.getMode() == 23){
+          ButtleContents.attack(slime.getAttack()+3, enemy, slime);
+        }else{
+          ButtleContents.attack(slime.getAttack(), enemy, slime);
+        }
         memory = 3;
       } else if (myHand == 3 && enemyHand == 2) {// パーとチョキ
         ButtleContents.enemyAttack(enemy.getAttack(), slime, enemy);
