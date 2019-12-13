@@ -5,7 +5,6 @@ import actor.*;
 
 import java.util.Scanner;
 import java.util.Random;
-
 //村崎 たくみ
 public class Janken {
   public static int count = 0;

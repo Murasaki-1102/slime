@@ -5,12 +5,11 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 import actor.*;
-
 //村崎
 public class Buttle {
-
-  public static boolean doButtle(Slime slime, Enemy enemy) {
-
+  
+  public static boolean doButtle(Slime slime, Enemy enemy){
+    
     int memory = -1;
     int count = -1;
     boolean enemyDownFlg = false;
@@ -20,10 +19,10 @@ public class Buttle {
     System.out.println("戦闘スタート！");
     do {
       ButtleContents.displayStatus(slime, enemy);
-      if (enemy.getName() != "門番" && enemy.getName() != "勇者") {
+      if(enemy.getName() != "門番" && enemy.getName() != "勇者"){
         Janken.janken(slime, enemy);
-      } else {
-        memory = Janken.exJanken(slime, enemy, count, memory);
+      }else{
+        memory = Janken.exJanken(slime,enemy,count,memory);
       }
       if (enemy.getHitPoint() == 0) {
         enemyDownFlg = true;
