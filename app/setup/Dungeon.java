@@ -459,8 +459,10 @@ public class Dungeon {
               gameOver();
             }
           } else {
+            System.out.println("====================================================");
             System.out.print("【ヒント】");
             displayHint(grid);
+            System.out.println("====================================================");
             break;
           }
         }
