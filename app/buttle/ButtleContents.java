@@ -9,7 +9,7 @@ public class ButtleContents {
   public static void displayStatus(Slime slime, Enemy enemy) {
     BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
     try {
-      System.out.println("[Enterで次へ]");      
+      System.out.println("[Enterで次へ]");
       reader.readLine();
     } catch (IOException e) {
       System.out.println("問題が発生しました");
@@ -35,7 +35,7 @@ public class ButtleContents {
     System.out.println("--------------------------------------\n");
     System.out.println(slime.getName() + "の勝ち！！！！");
     System.out.println(enemy.getName() + "は" + damage + "のダメージで残り体力が" + enemy.getHitPoint() + "になった!");
-    if(nokoriHP > 0){
+    if (nokoriHP > 0) {
       ButtleContents.displayStatus(slime, enemy);
     }
   }
@@ -45,7 +45,7 @@ public class ButtleContents {
     System.out.println("--------------------------------------");
     System.out.println(enemy.getName() + "の勝ち！！！！");
 
-    if(enemy.getMode() == 1 && enemy.getHitPoint() <= 8){
+    if (enemy.getMode() == 1 && enemy.getHitPoint() <= 8) {
       System.out.println("勇者は力を振り絞り強力な攻撃を放った！！");
       damage += 4;
     }
@@ -57,7 +57,7 @@ public class ButtleContents {
       slime.setHitPoint(nokoriHP);
     }
     System.out.println(slime.getName() + "は" + damage + "のダメージで残り体力が" + slime.getHitPoint() + "になった!");
-    if(nokoriHP > 0){
+    if (nokoriHP > 0) {
       ButtleContents.displayStatus(slime, enemy);
     }
   }
@@ -69,15 +69,38 @@ public class ButtleContents {
     System.out.println("あいこ！");
     System.out.println(slime.getName() + "はあいこで残り体力が" + slime.getHitPoint() + "になった!");
     System.out.println(enemy.getName() + "はあいこで残り体力が" + enemy.getHitPoint() + "になった!");
-    if(slime.getHitPoint() > 0 && enemy.getHitPoint() > 0){
+    if (slime.getHitPoint() > 0 && enemy.getHitPoint() > 0) {
       ButtleContents.displayStatus(slime, enemy);
     }
 
   }
 
-  public static void outputResult(boolean enemyDownFlg) {
+  public static void outputResult(boolean enemyDownFlg, Enemy enemy) {
     if (enemyDownFlg) {
       System.out.println("\n勝ちました！");
+      // 早津
+      switch (enemy.getName()) {
+      case "兵士A":
+        System.out.println("**********************");
+        System.out.println("*グーの書を手に入れた*");
+        System.out.println("**********************");
+        break;
+      case "兵士B":
+        System.out.println("************************");
+        System.out.println("*チョキの書を手に入れた*");
+        System.out.println("************************");
+        break;
+      case "兵士C":
+        System.out.println("**********************");
+        System.out.println("*パーの書を手に入れた*");
+        System.out.println("**********************");
+        break;
+      case "門番":
+        System.out.println("****************");
+        System.out.println("*鍵を手に入れた*");
+        System.out.println("****************");
+        break;
+      }
     } else {
       System.out.println("\n負けました‥");
     }
