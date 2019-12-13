@@ -30,7 +30,7 @@ public class Buttle {
         break;
       }
     } while (slime.getHitPoint() != 0);
-
+    // 早津
     ButtleContents.outputResult(enemyDownFlg, enemy);
 
     System.out.println("バトルが終了しました");
