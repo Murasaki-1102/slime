@@ -1,4 +1,3 @@
-package app;
 // import java.util.Scanner;
 // import actor.Actor;
 import actor.Enemy;

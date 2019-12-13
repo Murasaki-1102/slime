@@ -172,7 +172,7 @@ public class Dungeon {
     System.out.println("【移動】");
     System.out.println("上：w 下：s 右：d 左：a");
     System.out.println("【コマンド】");
-    System.out.println("アイテムを使う：u 現在のステータスを見る：p");
+    System.out.println("アイテムを使う：u | 現在のステータスを見る：p | 取得済みのヒントを見る：o");
     System.out.print("command?：");
     Scanner scan = new Scanner(System.in);
     String str = scan.next();
@@ -194,10 +194,44 @@ public class Dungeon {
       useItem();
     } else if (str.equals("p")) {
       checkStatus();
+    } else if (str.equals("o")){
+      lookHints();
     } else {
       System.out.println("無効なコマンドです");
       displayGame();
     }
+  }
+
+  public static void lookHints(){
+    String display;
+    System.out.println("");
+    System.out.println("");
+    for(int i = 0; i < dungeon.length-1; i++){
+      System.out.print("["+(i+1)+"] :");
+      if(dungeon[i][1] == 1){
+        display = hint[i];
+        System.out.print(" "+display+"      ");
+      }else{
+        System.out.print(" ？？？？？？？      ");
+      }
+      if((i+1)%3 == 0 && i != 0){
+        System.out.println("");
+      }
+    }
+
+    BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+    try {
+      System.out.println("--------");
+
+      System.out.println("[Enterキーでマップに戻る]");
+      System.out.println("");
+      System.out.println("");
+      reader.readLine();
+      displayGame();
+    } catch (IOException e) {
+      System.out.println("問題が発生しました");
+    }
+
   }
 
   public static void checkStatus(){
@@ -425,8 +459,10 @@ public class Dungeon {
               gameOver();
             }
           }else{
+            System.out.println("===========================================================================");
             System.out.print("【ヒント】");
             displayHint(grid);
+            System.out.println("===========================================================================");
             break;
           }
         }
