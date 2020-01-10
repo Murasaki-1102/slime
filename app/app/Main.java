@@ -1,5 +1,6 @@
 // import java.util.Scanner;
 // import actor.Actor;
+package app;
 import actor.Enemy;
 import actor.Slime;
 import buttle.*;

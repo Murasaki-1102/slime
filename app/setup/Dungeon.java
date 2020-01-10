@@ -423,7 +423,7 @@ public class Dungeon {
             try {
               System.out.println("--------");
 
-              System.out.println("[Enterキーでマップに戻る]");
+              System.out.println("[Enterキーを押してね]");
               reader.readLine();
             } catch (IOException e) {
               System.out.println("問題が発生しました");
@@ -492,12 +492,20 @@ public class Dungeon {
           System.out.println("問題が発生したよ。");
         }
       } else {
-        System.out.println("あなたは死にました");
+        System.out.println("あなたは死んでしまった...");
       }
     } else {
-      System.out.println("あなたは敵に囲まれました");
+      System.out.println("あなたは敵に囲まれ、死んでしまった...");
     }
+    System.out.println("[Enterキーでゲームを終了]");
+    BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+    try {
+    reader.readLine();
     System.exit(0);
+    }catch (IOException e){
+      System.out.println("問題が発生したよ。");
+    }
+    
   }
 
   public static void displayDungeon() {
